@@ -18,6 +18,11 @@ class PostController
         $this->render('index', $posts = [1,2,3]);
     }
 
+    public function create()
+    {
+        $this->render('create', $posts = [1,2,3]);
+    }
+
     public function render($view, $params)
     {
         $path = explode('\\', __CLASS__);

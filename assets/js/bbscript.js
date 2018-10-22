@@ -68,7 +68,7 @@ var Song = Model.extend({
 // Collections
 var Songs = Backbone.Collection.extend({
     model : Song,
-    url: '/api/songs'
+    url: '/api/v1/posts'
 });
 
 var songs = new Songs();
