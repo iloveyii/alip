@@ -21,17 +21,23 @@ class PostController
     public function create()
     {
         $post = new \App\Models\Post();
-        $post->setAttributes($this->request);
-        print_r($post->validate());
-        $this->render('create', $posts = [1,2,3]);
+
+        if($this->request->isPost()) {
+            $post->setAttributes($this->request);
+            if( $post->validate() && $post->create() ) {
+                header("Location: /posts/index");
+            }
+        }
+
+        $this->render('create', $post);
     }
 
-    public function render($view, $params)
+    public function render($view, $model)
     {
         $path = explode('\\', __CLASS__);
         $className = array_pop($path);
         $prefix = strtolower( str_replace('Controller', '', $className) );
-        $content = print_r($params, true);
+
         require_once "views/{$prefix}/{$view}.php";
     }
 }

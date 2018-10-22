@@ -25,16 +25,10 @@
     <div class="collapse navbar-collapse" id="navbarColor03">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="/posts/index">Index <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Features</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Pricing</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">About</a>
+                <a class="nav-link" href="/posts/create">Create</a>
             </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
@@ -48,29 +42,21 @@
 
     <div class="row">
         <div class="col-md-12">
-            <h2>Welcome to BackBone - Songs app</h2>
+            <h2>Welcome to BackBone - Blog app</h2>
             <br />
         </div>
     </div>
 
     <div class="row">
         <div class="col-md-6">
-            <form class="form-group" action="/api/songs" method="post" encType="multipart/form-data">
+            <form class="form-group" action="/posts/create" method="post">
                 <div class="form-group">
                     <label class="form-control-label" for="title">Title</label>
-                    <input type="text" placeholder="Type title of the post" class="form-control is-valid" id="title">
+                    <input type="text" name="title" placeholder="Type title of the post" class="form-control is-valid" id="title" value="<?=$model->title?>">
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" for="description">Description</label>
-                    <input type="text" placeholder="Type description" class="form-control is-valid" id="author">
-                </div>
-                <div class="form-group" style="display: none">
-                    <label class="form-control-label" for="author">Artist</label>
-                    <input type="text" placeholder="Type artist of the song" class="form-control is-valid" id="artist">
-                </div>
-                <div class="form-group" style="display: none">
-                    <label class="form-control-label" for="userPhotoInput">Song</label>
-                    <input type="file" name="song" accept="audio/*" class="form-control is-valid" id="song">
+                    <input type="text" name="description" placeholder="Type description" class="form-control is-valid" id="author" value="<?=$model->description?>">
                 </div>
 
                 <br />

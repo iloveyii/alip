@@ -40,7 +40,7 @@ var Model = Backbone.Model.extend({
 
 var Song = Model.extend({
 
-    urlRoot: '/api/songs',// very important for delete method
+    urlRoot: '/posts/create',// very important for delete method
     idAttribute: 'id', // very important for delete method else delete will fire only on api/songs without id
     defaults: {
         "filename": "horse.ogg"

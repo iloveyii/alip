@@ -2,12 +2,16 @@
 
 namespace App\Models;
 
+use App\Models\Database;
 
-class Post
+class Post extends Model
 {
     public $id;
     public $title;
     public $description;
+
+    private $tableName = 'post';
+    private $isNewRecord = null;
 
     public function __construct($id = null, $title = null, $description =null)
     {
@@ -19,65 +23,42 @@ class Post
     public function setAttributes(IRequest $request)
     {
         $attributes = $request->body();
-        $this->id = $attributes['id'];
+        $this->id = isset($attributes['id']) ? $attributes['id'] : null;
         $this->title = $attributes['title'];
         $this->description = $attributes['description'];
-    }
-
-    public function validate()
-    {
-        $validation = [];
-
-        $rules = $this->rules();
-
-        foreach ($rules as $varName=>$ruleArray) {
-            foreach ($ruleArray as $key=>$ruleName) {
-                $varValue = $this->{$varName};
-                switch ($ruleName) {
-                    case 'integer':
-                        if( ! is_numeric($varValue) ) {
-                            $validation[$varName][] = "{$varName} must be an integer";
-                        }
-                        break;
-
-                    case 'string':
-                        if( ! is_string($varValue) && is_numeric($this->{$varName}) ) {
-                            $validation[$varName][] = "{$varName} must be an integer";
-                        }
-                        break;
-
-                    case 'required':
-                        if( ! isset($varValue)) {
-                            $validation[$varName][] = "{$varName} is required";
-                        }
-                        break;
-                }
-
-                switch ($key) {
-                    case 'minLength':
-                        if(strlen($varValue) < $ruleName) {
-                            $validation[$varName][] = "{$varName} min length is {$ruleName}";
-                        }
-                        break;
-
-                    case 'maxLength':
-                        if(strlen($varValue) > $ruleName) {
-                            $validation[$varName][] = "{$varName} max length is {$ruleName}";
-                        }
-                        break;
-                }
-            }
-        }
-
-        return $validation;
+        $this->isNewRecord = true;
     }
 
     public function rules()
     {
         return [
-            'id' => ['integer', 'required'],
-            'title' => ['string', 'minLength'=>5, 'maxLength'=>30],
+            'id' => ['integer'],
+            'title' => ['string', 'minLength'=>5, 'maxLength'=>40],
             'description' => ['string', 'minLength'=>15, 'maxLength'=>300],
         ];
     }
+
+    // CRUD
+    public function create()
+    {
+        $query = sprintf("INSERT INTO %s (title, description) VALUES (:title, :description)", $this->tableName);
+        $params = [':title'=>$this->title, ':description'=>$this->description];
+        return Database::connect()->insert($query, $params);
+    }
+
+    public function read()
+    {
+
+    }
+
+    public function update()
+    {
+
+    }
+
+    public function delete()
+    {
+
+    }
+
 }

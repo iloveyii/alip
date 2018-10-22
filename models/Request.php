@@ -69,6 +69,11 @@ class Request implements IRequest
         $this->postVars = $post;
     }
 
+    public function isPost()
+    {
+        return ($this->requestMethod == 'POST');
+    }
+
     /**
      * For testing set get vars and this will override the real $_GET vars
      * @param array $get

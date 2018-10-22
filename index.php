@@ -3,6 +3,7 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 require_once 'vendor/autoload.php';
+require_once 'config/db.php';
 
 use App\Models\Router;
 use App\Models\Request;
@@ -18,16 +19,16 @@ $router->get('/posts/index', function ($request) {
 
 
 $router->get('/posts/create', function ( \App\Models\IRequest $request) {
-    $request->setGetVars(['id'=>'gg', 'title'=>'this', 'description'=> 'this is desc']); // test
-    $request->setPostVars(['id'=>'gg', 'title'=>'this', 'description'=> 'this is desc']); // test
+//    $request->setGetVars(['id'=>'55', 'title'=>'this', 'description'=> 'thijgkhk kh  hk kkjk khk kh ks is desc']); // test
+//    $request->setPostVars(['id'=>9, 'title'=>'this iii', 'description'=> 'this iskljl lj lljljlljljlljlj jl desc']); // test
 
     $controller = new \App\Controllers\PostController($request);
     $controller->create();
 });
 
 $router->post('/posts/create', function ( \App\Models\IRequest $request) {
-    $request->setGetVars(['id'=>'gg', 'title'=>'this', 'description'=> 'this is desc']); // test
-    $request->setPostVars(['id'=>'gg', 'title'=>'this', 'description'=> 'this is desc']); // test
+//    $request->setGetVars(['id'=>'gg', 'title'=>'this', 'description'=> 'this is desc']); // test
+//    $request->setPostVars(['id'=>88, 'title'=>'this', 'description'=> 'this is desc']); // test
 
     $controller = new \App\Controllers\PostController($request);
     $controller->create();

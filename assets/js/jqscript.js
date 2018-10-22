@@ -58,7 +58,7 @@ $(document).ready(function () {
                 /* $('ul#songs').empty();
                 $('ul#songs').append(webSongs.makeLi(songs.toJSON()));
                 console.log('New song added' + song); */
-            }, 
+            },
             error: function () {
                 alert('Some error has occurred, please refresh the page.')
             }
