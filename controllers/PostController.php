@@ -1,5 +1,5 @@
 <?php
-require __DIR__ . '/../vendor/autoload.php';
+namespace App\Controllers;
 
 use App\models;
 
@@ -15,11 +15,15 @@ class PostController
 
     public function index()
     {
-        $this->render('index', $posts = []);
+        $this->render('index', $posts = [1,2,3]);
     }
 
     public function render($view, $params)
     {
-
+        $path = explode('\\', __CLASS__);
+        $className = array_pop($path);
+        $prefix = strtolower( str_replace('Controller', '', $className) );
+        $content = print_r($params, true);
+        require_once "views/{$prefix}/{$view}.php";
     }
 }
