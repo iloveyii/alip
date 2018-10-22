@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
+
 class Database
 {
-
     private static $instance;
     public $db;
     public $numRows;

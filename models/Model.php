@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: alex
- * Date: 2018-10-22
- * Time: 17:46
- */
-
 namespace App\Models;
 
 
@@ -16,7 +9,6 @@ class Model
     public function validate()
     {
         $validation = [];
-
         $rules = $this->rules();
 
         foreach ($rules as $varName=>$ruleArray) {
