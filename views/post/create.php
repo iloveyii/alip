@@ -48,7 +48,18 @@
     </div>
 
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-12">
+           <?php
+            if($model->hasErrors()) {
+                $errors = $model->getErrors();
+                include_once 'views/post/errors.php';
+            }
+           ?>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
             <form class="form-group" action="/posts/create" method="post">
                 <div class="form-group">
                     <label class="form-control-label" for="title">Title</label>

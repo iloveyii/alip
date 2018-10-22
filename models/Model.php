@@ -11,7 +11,7 @@ namespace App\Models;
 
 class Model
 {
-    private $errors = [];
+    protected $errors = [];
 
     public function validate()
     {
@@ -58,7 +58,8 @@ class Model
             }
         }
 
-        print_r($validation);
+        $this->errors = $validation;
+
         return count($validation) === 0;
     }
 

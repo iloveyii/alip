@@ -53,5 +53,9 @@ $router->get('/api/v1/posts', function ($request) {
         ],
     ];
 
-    echo json_encode($songs);
+    $controller = new \App\Controllers\PostController($request);
+    $result = $controller->indexJson();
+
+    echo $result;
+
 });

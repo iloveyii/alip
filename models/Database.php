@@ -44,7 +44,7 @@ class Database
     {
         $sth = $this->db->prepare($query);
         $sth->execute($params);
-        $result = $sth->fetchAll(PDO::FETCH_ASSOC);
+        $result = $sth->fetchAll(\PDO::FETCH_ASSOC);
         $this->lastId = $this->db->lastInsertId();
         $this->numRows = count($result) - 1;
         return $result;
@@ -54,7 +54,7 @@ class Database
     {
         $sth = $this->db->prepare($query);
         $sth->execute($params);
-        $result = $sth->fetch(PDO::FETCH_ASSOC);
+        $result = $sth->fetch(\PDO::FETCH_ASSOC);
         $this->lastId = $this->db->lastInsertId();
         $this->numRows = count( (array)$result);
         return $result;

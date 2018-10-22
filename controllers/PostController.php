@@ -40,4 +40,12 @@ class PostController
 
         require_once "views/{$prefix}/{$view}.php";
     }
+
+    public function indexJson()
+    {
+        $post = new \App\Models\Post();
+        $posts = $post->readAll();
+        header("Content-Type: application/json");
+        return json_encode($posts);
+    }
 }

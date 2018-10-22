@@ -46,6 +46,15 @@ class Post extends Model
         return Database::connect()->insert($query, $params);
     }
 
+    public function readAll()
+    {
+        $query = sprintf("SELECT id, title, description AS author, title AS filename, title AS artist FROM %s", $this->tableName);
+        $params = [':title'=>$this->title, ':description'=>$this->description];
+        $rows = Database::connect()->selectAll($query, []);
+
+        return $rows;
+    }
+
     public function read()
     {
 
