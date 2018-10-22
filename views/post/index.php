@@ -55,9 +55,7 @@
                 <thead>
                 <tr>
                     <th>Title</th>
-                    <th>Author</th>
-                    <th>Artist</th>
-                    <th>Play</th>
+                    <th>Description</th>
                     <th>Action</th>
                 </tr>
                 </thead>
@@ -73,8 +71,6 @@
 <script type="text/template" class="song-item-template">
     <td><span class="title"><%=title%></span></td>
     <td><span class="author"><%=author%></span></td>
-    <td><span class="artist"><%=artist%></span></td>
-    <td><span class="play"><audio src="/assets/audio/<%=filename%>" controls> </audio></span></td>
     <td nowrap style="width:240px;"><span class="controls">
                 <button class="btn btn-warning btn-sm item-edit">Edit</button>
                 <button class="btn btn-danger btn-sm item-delete">Delete</button>

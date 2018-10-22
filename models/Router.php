@@ -8,10 +8,7 @@ class Router
 {
     private $request;
     private $pathNotFound = true;
-    private $allowedMethods = [
-        'GET',
-        'POST'
-    ];
+    private $allowedMethods = [ 'GET', 'POST'];
 
     public function __construct(IRequest $request)
     {
