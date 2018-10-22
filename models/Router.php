@@ -25,13 +25,16 @@ class Router
     public function get($route, $method)
     {
         $this->request->route = $route;
+        $redirectUrl = $this->request->redirectUrl;
+        // Make index optional
+        if(substr($this->request->redirectUrl, -1) == '/') {
+            $redirectUrl = $redirectUrl . 'index';
+        }
 
-        if($this->request->route === $this->request->redirectUrl) {
+        if($route === $redirectUrl) {
             $this->pathNotFound = false;
             call_user_func_array($method, [$this->request]);
         }
-
-
     }
 
     public function post($route, $method)
