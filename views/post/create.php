@@ -58,17 +58,17 @@
             <form class="form-group" action="/api/songs" method="post" encType="multipart/form-data">
                 <div class="form-group">
                     <label class="form-control-label" for="title">Title</label>
-                    <input type="text" placeholder="Type title of the song" class="form-control is-valid" id="title">
+                    <input type="text" placeholder="Type title of the post" class="form-control is-valid" id="title">
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" for="author">Author</label>
-                    <input type="text" placeholder="Type author of the song" class="form-control is-valid" id="author">
+                    <label class="form-control-label" for="description">Description</label>
+                    <input type="text" placeholder="Type description" class="form-control is-valid" id="author">
                 </div>
-                <div class="form-group">
+                <div class="form-group" style="display: none">
                     <label class="form-control-label" for="author">Artist</label>
                     <input type="text" placeholder="Type artist of the song" class="form-control is-valid" id="artist">
                 </div>
-                <div class="form-group">
+                <div class="form-group" style="display: none">
                     <label class="form-control-label" for="userPhotoInput">Song</label>
                     <input type="file" name="song" accept="audio/*" class="form-control is-valid" id="song">
                 </div>

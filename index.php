@@ -8,7 +8,7 @@ use App\Models\Router;
 use App\Models\Request;
 
 $request = new Request();
-$request->setRequestMethod('POST'); // test methods
+//$request->setRequestMethod('POST'); // test methods
 $router = new Router($request);
 
 $router->get('/posts/index', function ($request) {
@@ -34,23 +34,23 @@ $router->post('/posts/create', function ( \App\Models\IRequest $request) {
 });
 
 
-//$router->get('/api/v1/posts', function ($request) {
-//    $songs = [
-//        [
-//            'artist' => "Some Singer",
-//            'author' => "Some Lover",
-//            'filename' => "horse.ogg",
-//            'id'=> 1,
-//            'title' => "A lovely song"
-//        ],
-//        [
-//            'artist' => "Some Singer 2 ",
-//            'author' => "Some Lover 2",
-//            'filename' => "horse.ogg 2",
-//            'id'=> 2 ,
-//            'title' => "A lovely song 2"
-//        ],
-//    ];
-//
-//    echo json_encode($songs);
-//});
+$router->get('/api/v1/posts', function ($request) {
+    $songs = [
+        [
+            'artist' => "Some Singer",
+            'author' => "Some Lover",
+            'filename' => "horse.ogg",
+            'id'=> 1,
+            'title' => "A lovely song"
+        ],
+        [
+            'artist' => "Some Singer 2 ",
+            'author' => "Some Lover 2",
+            'filename' => "horse.ogg 2",
+            'id'=> 2 ,
+            'title' => "A lovely song 2"
+        ],
+    ];
+
+    echo json_encode($songs);
+});
