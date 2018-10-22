@@ -9,11 +9,19 @@ class Post
     public $title;
     public $description;
 
-    public function __construct($id, $title, $description)
+    public function __construct($id = null, $title = null, $description =null)
     {
         $this->id = $id;
         $this->title = $title;
         $this->description = $description;
+    }
+
+    public function setAttributes(IRequest $request)
+    {
+        $attributes = $request->body();
+        $this->id = $attributes['id'];
+        $this->title = $attributes['title'];
+        $this->description = $attributes['description'];
     }
 
     public function validate()

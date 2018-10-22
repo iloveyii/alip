@@ -12,4 +12,6 @@ namespace App\Models;
 interface IRequest
 {
     public function body();
+    public function setPostVars( array $post);
+    public function setGetVars( array  $get );
 }

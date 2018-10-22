@@ -12,16 +12,18 @@ namespace App\Models;
 class Request implements IRequest
 {
     public $route = null;
+    public $getVars = [];
+    public $postVars = [];
 
     public function __construct()
     {
-       $this->getRequestVars();
+       $this->bootStrap();
     }
 
     /**
      * Get all the vars from $_SERVER into local class vars
      */
-    private function getRequestVars()
+    private function bootStrap()
     {
         foreach ($_SERVER as $key=>$value) {
             $this->{$this->toCamelCase($key)} = $value;
@@ -49,18 +51,47 @@ class Request implements IRequest
     {
         switch ($this->requestMethod) {
             case 'GET':
+                $this->getVars = empty($this->getVars) ?  $_GET : $this->getVars; // for testing override real vars by setted vars
                 return $this->getGetVars();
             case 'POST':
+                $this->postVars = empty($this->postVars) ? $_POST : $this->postVars; // for testing override real vars by setted vars
                 return $this->getPostVars();
 
         }
     }
 
+    /**
+     * For testing set post vars and this will override the real $_POST vars
+     * @param array $post
+     */
+    public function setPostVars($post)
+    {
+        $this->postVars = $post;
+    }
+
+    /**
+     * For testing set get vars and this will override the real $_GET vars
+     * @param array $get
+     */
+    public function setGetVars($get)
+    {
+        $this->getVars = $get;
+    }
+
+    /**
+     * For testing set the request method to desired one
+     * @param $method
+     */
+    public function setRequestMethod($method)
+    {
+        $this->requestMethod = $method;
+    }
+
     private function getGetVars()
     {
         $get = [];
-        foreach ($_GET as $key => $value) {
-            $get[$key] =  filter_input(INPUT_GET, $key, FILTER_SANITIZE_SPECIAL_CHARS);
+        foreach ($this->getVars as $key => $value) {
+            $get[$key] = $value; //  filter_input(INPUT_GET, $key, FILTER_SANITIZE_SPECIAL_CHARS);
         }
 
         return $get;
@@ -69,7 +100,7 @@ class Request implements IRequest
     private function getPostVars()
     {
         $post = [];
-        foreach ($_POST as $key => $value) {
+        foreach ($this->postVars as $key => $value) {
             $post[$key] =  filter_input(INPUT_POST, $key, FILTER_SANITIZE_SPECIAL_CHARS);
         }
 

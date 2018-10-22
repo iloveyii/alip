@@ -20,6 +20,9 @@ class PostController
 
     public function create()
     {
+        $post = new \App\Models\Post();
+        $post->setAttributes($this->request);
+        print_r($post->validate());
         $this->render('create', $posts = [1,2,3]);
     }
 

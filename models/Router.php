@@ -31,7 +31,7 @@ class Router
             $redirectUrl = $redirectUrl . 'index';
         }
 
-        if($route === $redirectUrl) {
+        if($route === $redirectUrl && $this->request->requestMethod === 'GET') {
             $this->pathNotFound = false;
             call_user_func_array($method, [$this->request]);
         }
@@ -39,7 +39,17 @@ class Router
 
     public function post($route, $method)
     {
-        return call_user_func_array($method, array_combine($this->request, ['route'=>$route]));
+        $this->request->route = $route;
+        $redirectUrl = $this->request->redirectUrl;
+        // Make index optional
+        if(substr($this->request->redirectUrl, -1) == '/') {
+            $redirectUrl = $redirectUrl . 'index';
+        }
+
+        if($route === $redirectUrl && $this->request->requestMethod === 'POST') {
+            $this->pathNotFound = false;
+            call_user_func_array($method, [$this->request]);
+        }
     }
 
     public function __destruct()
