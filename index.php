@@ -7,6 +7,7 @@ require_once 'vendor/autoload.php';
 use App\Models\Router;
 use App\Models\Request;
 
+
 $router = new Router(new Request);
 
 $router->get('/posts/index', function ($request) {
@@ -16,8 +17,11 @@ $router->get('/posts/index', function ($request) {
 
 
 $router->get('/posts/create', function ($request) {
-    $controller = new \App\Controllers\PostController($request);
-    $controller->create();
+//    $controller = new \App\Controllers\PostController($request);
+//    $controller->create();
+    $post = new \App\Models\Post(null, 'my title', 'my description this is a smart des and longer than 15 chars');
+    print_r($post->validate());
+
 });
 
 
