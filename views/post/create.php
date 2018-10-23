@@ -79,22 +79,7 @@
 
 </div>
 
-<script type="text/template" class="song-item-template">
-    <td><span class="title"><%=title%></span></td>
-    <td nowrap style="width:240px;"><span class="controls">
-                <button class="btn btn-warning btn-sm item-edit">Edit</button>
-                <button class="btn btn-danger btn-sm item-delete">Delete</button>
-
-                <button style="display: none;" class="btn btn-primary btn-sm item-update">Update</button>
-                <button style="display: none;" class="btn btn-default btn-sm item-cancel">Cancel</button>
-            </span></td>
-</script>
-
 <script src="/assets/js/lib/jquery-min.js"></script>
-<script src="/assets/js/lib/underscore-min.js"></script>
-<script src="/assets/js/lib/backbone-min.js"></script>
-<script src="/assets/js/bbscript.js"></script>
-<script src="/assets/js/jqscript.js"></script>
 <script src="/assets/js/lib/bootstrap.js"></script>
 
 </body>

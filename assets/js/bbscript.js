@@ -52,16 +52,16 @@ var Model = Backbone.Model.extend({
 
 });
 
-var Song = Model.extend({
+var Post = Model.extend({
     urlRoot: '/api/v1/posts', // very important for delete method
-    idAttribute: 'id', // very important for delete method else delete will fire only on api/songs without id
+    idAttribute: 'id', // very important for delete method else delete will fire only on api/posts without id
     defaults: {
         "id": "1",
         "title": "Initial title",
         "description": "Initial description",
     },
     initialize: function () {
-        console.log('A new song has been created.');
+        console.log('A new post has been created.');
     },
     commonMethod: function () {
         Model.prototype.commonMethod();
@@ -78,27 +78,27 @@ var Song = Model.extend({
 });
 
 // Collections
-var Songs = Backbone.Collection.extend({
-    model : Song,
+var Posts = Backbone.Collection.extend({
+    model : Post,
     url: '/api/v1/posts'
 });
 
-var songs = new Songs();
+var posts = new Posts();
 
 // Fetching collections
-songs.fetch({
+posts.fetch({
     success: function (resp) {
-        console.log('Fetching songs success.');
-        // webSongs.index(songs);
+        console.log('Fetching posts success.');
+        // webPosts.index(posts);
     },
     error: function () {
-        console.log('Error in fetching songs.');
+        console.log('Error in fetching posts.');
     }
 });
 
 // View for one model
-var SongView = Backbone.View.extend({
-    model: new Song(),
+var PostView = Backbone.View.extend({
+    model: new Post(),
     tagName: 'tr',
     events: {
         'click .item-edit' : 'edit',
@@ -159,7 +159,7 @@ var SongView = Backbone.View.extend({
     },
     delete: function () {
         // console.log('Removing model: ' + this.model.get('id'));
-        songs.remove(this.model);
+        posts.remove(this.model);
         this.model.destroy();
         this.$el.remove();
     },
@@ -171,7 +171,7 @@ var SongView = Backbone.View.extend({
         this.$('.item-cancel').toggle();
     },
     initialize: function () {
-        this.template = _.template($('.song-item-template').html());
+        this.template = _.template($('.post-item-template').html());
     },
     render: function () {
         this.$el.html(this.template(this.model.toJSON()));
@@ -181,18 +181,18 @@ var SongView = Backbone.View.extend({
 
 
 // View for all models
-var SongsView = Backbone.View.extend({
-    model : songs,
-    el: $('.song-index'), // tbody
+var PostsView = Backbone.View.extend({
+    model : posts,
+    el: $('.post-index'), // tbody
     initialize: function () {
-        console.log('Inside songs view' + songs.toArray());
+        console.log('Inside posts view' + posts.toArray());
         this.model.on('add', this.render, this);
     },
     render: function () {
         var self = this;
         this.$el.html('');
         _.each(this.model.toArray(), function (sng) {
-            self.$el.append((new SongView({model:sng})).render().$el)
+            self.$el.append((new PostView({model:sng})).render().$el)
         });
         return this;
     }

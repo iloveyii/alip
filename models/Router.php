@@ -1,9 +1,6 @@
 <?php
 namespace App\Models;
 
-use App\Models\Request;
-use App\Models\IRequest;
-
 class Router
 {
     private $request;

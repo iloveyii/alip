@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\Database;
 
 class Post extends Model
 {
@@ -13,6 +12,12 @@ class Post extends Model
     private $tableName = 'post';
     private $isNewRecord = null;
 
+    /**
+     * Post constructor.
+     * @param null $id
+     * @param null $title
+     * @param null $description
+     */
     public function __construct($id = null, $title = null, $description =null)
     {
         $this->id = $id;
@@ -20,16 +25,23 @@ class Post extends Model
         $this->description = $description;
     }
 
+    /**
+     * Pass request object to this method to set the object attributes
+     * @param IRequest $request
+     */
     public function setAttributes(IRequest $request)
     {
         $attributes = $request->body();
-//        $this->id = isset($attributes['id']) ? $attributes['id'] : null;
         $this->id = isset($request->params['id'])  ? $request->params['id'] : null;
         $this->title = $attributes['title'];
         $this->description = $attributes['description'];
         $this->isNewRecord = true;
     }
 
+    /**
+     * These are the validation rules for the attributes
+     * @return array
+     */
     public function rules()
     {
         return [
@@ -50,26 +62,13 @@ class Post extends Model
     public function readAll()
     {
         $query = sprintf("SELECT id, title, description AS author, title AS filename, title AS artist FROM %s", $this->tableName);
-        $params = [':title'=>$this->title, ':description'=>$this->description];
         $rows = Database::connect()->selectAll($query, []);
 
         return $rows;
     }
 
-    public function read()
-    {
-        $query = sprintf("SELECT id, title, description AS author, title AS filename, title AS artist FROM %s", $this->tableName);
-        $params = [':title'=>$this->title, ':description'=>$this->description];
-        $row = Database::connect()->select($query, []);
-
-    }
-
     public function update()
     {
-        if( ! isset($this->id)) {
-            // test
-            $this->id = 2;
-        }
         $query = sprintf("UPDATE %s SET title=:title, description=:description WHERE id=:id", $this->tableName);
         $params = [':id'=>$this->id, ':title'=>$this->title, ':description'=>$this->description];
         $result = Database::connect()->update($query, $params);

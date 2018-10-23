@@ -44,14 +44,14 @@
         <div class="col-md-12">
             <h2>Welcome to BackBone - Simple Blog</h2>
             <br />
-            <div id="song"></div>
+            <div id="post"></div>
         </div>
     </div>
 
     <div class="row">
         <div class="col-md-12">
             <br />
-            <table class="table table-hover" id="songs-index-table">
+            <table class="table table-hover" id="posts-index-table">
                 <thead>
                 <tr>
                     <th>Title</th>
@@ -59,7 +59,7 @@
                     <th>Action</th>
                 </tr>
                 </thead>
-                <tbody class="song-index">
+                <tbody class="post-index">
 
                 </tbody>
             </table>
@@ -68,7 +68,7 @@
 
 </div>
 
-<script type="text/template" class="song-item-template">
+<script type="text/template" class="post-item-template">
     <td><span class="title"><%=title%></span></td>
     <td><span class="author"><%=author%></span></td>
     <td nowrap style="width:240px;"><span class="controls">

@@ -2,15 +2,25 @@
 namespace App\Models;
 
 
+/**
+ * This is the parent model with common functionality for all child classes
+ * Class Model
+ * @package App\Models
+ */
 class Model
 {
     protected $errors = [];
 
     public function validate()
     {
-        $validation = [];
-        $rules = $this->rules();
+        $validation = []; // contains all errors
+        $rules = $this->rules(); // rules in the child class
 
+        /**
+         * Iterate over all rules
+         * Rules has the form of object property => ruleArray : ie first loop
+         * So we can get object property value by $this->{$property} : ie in second loop
+         */
         foreach ($rules as $varName=>$ruleArray) {
             foreach ($ruleArray as $key=>$ruleName) {
                 $varValue = $this->{$varName};

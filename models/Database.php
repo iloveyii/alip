@@ -10,6 +10,10 @@ class Database
     public $numRows;
     public $lastId;
 
+    /**
+     * This is a singleton pattern
+     * @return Database
+     */
     public static function connect()
     {
         $db = null;
@@ -42,37 +46,65 @@ class Database
 
     public function selectAll($query, $params)
     {
-        $sth = $this->db->prepare($query);
-        $sth->execute($params);
-        $result = $sth->fetchAll(\PDO::FETCH_ASSOC);
-        $this->lastId = $this->db->lastInsertId();
-        $this->numRows = count($result) - 1;
-        return $result;
+        try {
+            $sth = $this->db->prepare($query);
+            $sth->execute($params);
+            $result = $sth->fetchAll(\PDO::FETCH_ASSOC);
+            $this->lastId = $this->db->lastInsertId();
+            $this->numRows = count($result) - 1;
+            return $result;
+        }
+        catch (PDOException $e)
+        {
+            throw new Exception($e->getMessage() + $query);
+        }
     }
 
     public function selectOne($query, $params)
     {
-        $sth = $this->db->prepare($query);
-        $sth->execute($params);
-        $result = $sth->fetch(\PDO::FETCH_ASSOC);
-        $this->lastId = $this->db->lastInsertId();
-        $this->numRows = count( (array)$result);
-        return $result;
+        try {
+            $sth = $this->db->prepare($query);
+            $sth->execute($params);
+            $result = $sth->fetch(\PDO::FETCH_ASSOC);
+            $this->lastId = $this->db->lastInsertId();
+            $this->numRows = count((array)$result);
+            return $result;
+        }
+        catch (PDOException $e)
+        {
+            throw new Exception($e->getMessage() + $query);
+        }
     }
 
     public function delete($query, $params)
     {
-        $stmt = $this->db->prepare($query);
-        $result = $stmt->execute($params);
-        return $result;
+        try {
+            $stmt = $this->db->prepare($query);
+            $result = $stmt->execute($params);
+            return $result;
+        }
+        catch (PDOException $e)
+        {
+            throw new Exception($e->getMessage() + $query);
+        }
     }
 
     public function update($query, $params)
     {
-        $stmt = $this->db->prepare($query);
-        $num = $stmt->execute($params);
-        $this->numRows = $num;
-        return $num;
+        try {
+            $stmt = $this->db->prepare($query);
+            $num = $stmt->execute($params);
+            $this->numRows = $num;
+            return $num;
+        }
+        catch (PDOException $e)
+        {
+            throw new Exception($e->getMessage() + $query);
+        }
+        catch( Exception $e)
+        {
+            throw new Exception($e->getMessage() + $query);
+        }
     }
 
     public function insert($query, $params=[])
