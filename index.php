@@ -37,5 +37,11 @@ $router->put('/api/v1/posts/:id', function ($request) {
     $controller = new \App\Controllers\PostController($request);
     $result = $controller->update();
     echo $result;
-//    echo json_encode($request->params);
+});
+
+$router->delete('/api/v1/posts/:id', function ($request) {
+    header("Content-Type: application/json");
+    $controller = new \App\Controllers\PostController($request);
+    $result = $controller->delete();
+    echo $result;
 });

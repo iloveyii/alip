@@ -1,34 +1,48 @@
-// Backbone.Model.prototype.idAttribute = 'id';
-// a sample model for easy validation
+
 var Model = Backbone.Model.extend({
+    checkValidation: function () {
+        var rules = this.rules;
+        var attrs = this.attributes;
+        var validation = [];
 
-    checkValidation: function (attrs, rules) {
         for(var key in rules) {
-            if( ! attrs[key]) {
-                console.log('There is no attribute with key : ', key);
+            var rulesValueParts = (rules[key]).split('|');
+            if(rulesValueParts.length > 1) {
+                for( var i=0; i < rulesValueParts.length; i++) {
+                    console.log('RuleValue: ' + rulesValueParts[i]);
+                    var valid = this.applyRule(attrs[key], rulesValueParts[i]);
+                    if(valid !== true) {
+                        validation[key] = valid;
+                    }
+                }
+            } else {
+                var valid = this.applyRule(attrs[key], rules[key]);
+                if(valid !== true) {
+                    validation[key] = valid;
+                }
             }
-
-            console.log('Key, Rule: ', attrs[key], rules[key]);
-            console.log(this.applyRule(attrs[key], rules[key]));
-            console.log('------------------------------------');
         }
+        console.log(validation);
     },
-    applyRule: function (attr, rule) {
 
-        console.log('Inside applyRule: ', attr, rule);
+    applyRule: function (attrValue, ruleName) {
 
-        switch(rule) {
+        console.log('Inside applyRule: ', attrValue, ruleName);
+
+        switch(ruleName) {
             case 'integer':
-                console.log('Applying rule integer on ', attr);
-                return Number.isInteger(parseInt(attr)) ? attr + ' is an integer' : attr + ' is not an integer';
+                var ret = Number.isInteger(parseInt(attrValue)) ? true : attrValue + ' is not an integer' ;
+                console.log('Applying rule integer on ', attrValue, ret);
+                return ret;
                 break;
             case 'required':
-                console.log('Applying rule required on ', attr);
-                return attr ? attr + ' is defined' : attr + ' is not defined';
+                var ret = attrValue ? true : attrValue + ' is not defined';
+                console.log('Applying rule required on ', attrValue);
+                return ret;
                 break;
             case 'string':
-                console.log('Applying rule string on ', attr);
-                return typeof attr == 'string' ? attr + ' is string' : attr + ' is not string';
+                var ret = typeof attrValue == 'string' ? true : attrValue + ' is string';
+                console.log('Applying rule string on ', attrValue, ret);
                 break;
         }
     },
@@ -39,11 +53,12 @@ var Model = Backbone.Model.extend({
 });
 
 var Song = Model.extend({
-
-    urlRoot: '/api/v1/posts',// very important for delete method
+    urlRoot: '/api/v1/posts', // very important for delete method
     idAttribute: 'id', // very important for delete method else delete will fire only on api/songs without id
     defaults: {
-        "filename": "horse.ogg"
+        "id": "1",
+        "title": "Initial title",
+        "description": "Initial description",
     },
     initialize: function () {
         console.log('A new song has been created.');
@@ -52,16 +67,13 @@ var Song = Model.extend({
         Model.prototype.commonMethod();
         console.log('This is a common method from the child.');
     },
-
-    validate: function (attrs) {
-
-        var rules = {
-            id: 'integer',
-            artist: 'required',
-            title: 'string'
-        };
-
-        this.checkValidation(attrs, rules);
+    rules: {
+        id: 'integer',
+        title: 'string|required|minLen=10',
+        description: 'string'
+    },
+    validate: function () {
+        this.checkValidation();
     }
 });
 

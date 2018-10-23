@@ -10,7 +10,7 @@ class Router
     public $defaultRoute = null;
     public $defaultMethod = null;
     private $pathNotFound = true;
-    private $allowedMethods = [ 'GET', 'POST', 'PUT'];
+    private $allowedMethods = [ 'GET', 'POST', 'PUT', 'DELETE'];
 
     public function __construct(IRequest $request, $defaultRoute)
     {
@@ -56,11 +56,14 @@ class Router
         }
     }
 
-    public function put($route, $method)
+    /**
+     * Note: works for one param only
+     * @param $route
+     */
+    private function getParams($route)
     {
-        $this->request->route = $route;
-        $redirectUrl = $this->request->redirectUrl;
         // Split out id part
+        $redirectUrl = $this->request->redirectUrl;
         $routeArray = explode(':', $route);
         $varsArray = [];
         if(count($routeArray) > 1) {
@@ -70,8 +73,26 @@ class Router
             }
             $this->request->params = $varsArray;
         }
+    }
+
+
+    public function put($route, $method)
+    {
+        $this->request->route = $route;
+        $this->getParams($route);
 
         if($this->request->requestMethod === 'PUT') {
+            $this->pathNotFound = false;
+            call_user_func_array($method, [$this->request]);
+        }
+    }
+
+    public function delete($route, $method)
+    {
+        $this->request->route = $route;
+        $this->getParams($route);
+
+        if($this->request->requestMethod === 'DELETE') {
             $this->pathNotFound = false;
             call_user_func_array($method, [$this->request]);
         }

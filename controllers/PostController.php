@@ -42,6 +42,18 @@ class PostController
         $this->render('create', $post);
     }
 
+    public function delete()
+    {
+        $post = new \App\Models\Post();
+
+        $post->setAttributes($this->request);
+        if( $post->delete() ) {
+            header("Location: /posts/index");
+        }
+
+        $this->render('create', $post);
+    }
+
     public function render($view, $model)
     {
         $path = explode('\\', __CLASS__);

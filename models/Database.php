@@ -63,7 +63,8 @@ class Database
     public function delete($query, $params)
     {
         $stmt = $this->db->prepare($query);
-        $stmt->execute($params);
+        $result = $stmt->execute($params);
+        return $result;
     }
 
     public function update($query, $params)

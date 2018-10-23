@@ -24,7 +24,7 @@ class Post extends Model
     {
         $attributes = $request->body();
 //        $this->id = isset($attributes['id']) ? $attributes['id'] : null;
-        $this->id = isset($request->params) ? $request->params['id'] : null;
+        $this->id = isset($request->params['id'])  ? $request->params['id'] : null;
         $this->title = $attributes['title'];
         $this->description = $attributes['description'];
         $this->isNewRecord = true;
@@ -79,9 +79,10 @@ class Post extends Model
 
     public function delete()
     {
-        $query = sprintf("SELECT id, title, description AS author, title AS filename, title AS artist FROM %s", $this->tableName);
-        $params = [':title'=>$this->title, ':description'=>$this->description];
-        $rows = Database::connect()->delete($query, []);
+        $query = sprintf("DELETE FROM %s WHERE id=:id", $this->tableName);
+        $params = [':id'=>$this->id];
+        $result = Database::connect()->delete($query, $params);
+        return $result;
     }
 
 }
