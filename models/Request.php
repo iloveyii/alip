@@ -57,6 +57,8 @@ class Request implements IRequest
             case 'POST':
                 $this->postVars = empty($this->postVars) ? $_POST : $this->postVars; // for testing override real vars by setted vars
                 return $this->getPostVars();
+            case 'PUT':
+                return $this->getPutVars();
 
         }
     }
@@ -111,6 +113,13 @@ class Request implements IRequest
         }
 
         return $post;
+    }
+
+    private function getPutVars()
+    {
+        $json = file_get_contents("php://input");
+        $put = json_decode($json);
+        return $put;
     }
 
 }

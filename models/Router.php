@@ -10,7 +10,7 @@ class Router
     public $defaultRoute = null;
     public $defaultMethod = null;
     private $pathNotFound = true;
-    private $allowedMethods = [ 'GET', 'POST'];
+    private $allowedMethods = [ 'GET', 'POST', 'PUT'];
 
     public function __construct(IRequest $request, $defaultRoute)
     {
@@ -51,6 +51,21 @@ class Router
         }
 
         if($route === $redirectUrl && $this->request->requestMethod === 'POST') {
+            $this->pathNotFound = false;
+            call_user_func_array($method, [$this->request]);
+        }
+    }
+
+    public function put($route, $method)
+    {
+        $this->request->route = $route;
+        $redirectUrl = $this->request->redirectUrl;
+        // Make index optional
+        if(substr($this->request->redirectUrl, -1) == '/') {
+            $redirectUrl = $redirectUrl . 'index';
+        }
+
+        if($this->request->requestMethod === 'PUT') {
             $this->pathNotFound = false;
             call_user_func_array($method, [$this->request]);
         }

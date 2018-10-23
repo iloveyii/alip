@@ -22,8 +22,18 @@ $router->post('/posts/create', function ( \App\Models\IRequest $request) {
     $controller->create();
 });
 
+
+/**
+ * For RESTFul API
+ */
 $router->get('/api/v1/posts', function ($request) {
     $controller = new \App\Controllers\PostController($request);
     $result = $controller->indexJson();
     echo $result;
+});
+
+$router->put('/api/v1/posts/:id', function ($request) {
+    $data = $request->body();
+    header("Content-Type: application/json");
+    echo json_encode($data);
 });
