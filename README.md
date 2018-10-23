@@ -1,7 +1,7 @@
 Alip Framework
 =======
-This a MVC PHP framework. The model has the business logic like validation. The view has the presentation (html) logic. The controller handles the different types of HTTP request. But before controller we need a router to route the request to designated controller based on the request URI.
-We have implemented a vary light Router class that handles GET, POST, UPDATE and DELETE methods.
+This a light PHP framework based on MVC pattern. The model has the business logic like validation. The view has the presentation (html) logic. The controller handles the different types of HTTP request. But before controller we need a router to route the request to designated controller based on the request URI.
+We have implemented a very light Router class that handles GET, POST, UPDATE and DELETE methods.
 
 This framework does not use any built in libraries or packages. All code is custom written. It only uses composer for autoloading.
 
@@ -18,7 +18,7 @@ This framework is useful for a light PHP web application or RESTFull API applica
 
 For more information about using Composer please see its [documentation](http://getcomposer.org/doc/).
 
-###How to use the framework
+## How to use the framework
 
 This framework is very easy to be used. You can create an object of the router by passing a request object to it as shown below.
 
@@ -65,8 +65,6 @@ Bellow the directory structure used:
   
  ```
 
-## Extensions
-
    
-<i>web development has never been so fun</i>  
+<i>Web development has never been so fun.</i>  
 [Hazrat Ali](http://blog.softhem.se/) 
