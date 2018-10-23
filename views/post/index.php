@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Backbone JS - Songs App</title>
+    <title>Backbone JS - Simple Blog</title>
     <link rel="icon" href="/assets/images/favicon.png">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,7 +17,7 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="/">Songs</a>
+    <a class="navbar-brand" href="/">Simple Blog</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -42,7 +42,7 @@
 
     <div class="row">
         <div class="col-md-12">
-            <h2>Welcome to BackBone - Songs app</h2>
+            <h2>Welcome to BackBone - Simple Blog</h2>
             <br />
             <div id="song"></div>
         </div>
