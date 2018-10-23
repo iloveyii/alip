@@ -110,7 +110,7 @@ class Request implements IRequest
     {
         $post = [];
         foreach ($this->postVars as $key => $value) {
-            $post[$key] =  filter_input(INPUT_POST, $key, FILTER_SANITIZE_SPECIAL_CHARS);
+            $post[$key] = $value; // filter_input(INPUT_POST, $key, FILTER_SANITIZE_SPECIAL_CHARS); // remove it for strip_tags to  work
         }
 
         return $post;

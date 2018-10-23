@@ -42,6 +42,14 @@ class Model
                             $validation[$varName][] = "{$varName} is required";
                         }
                         break;
+                    case 'alpha':
+                        if( preg_match('/[0-9]/', $varValue) == true) {
+                            $validation[$varName][] = "{$varName} should contain only alphabets";
+                        }
+                        break;
+                    case 'stripTags':
+                        $this->{$varName} = strip_tags($varValue);
+                        break;
                 }
 
                 switch ($key) {

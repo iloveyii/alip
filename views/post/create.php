@@ -67,7 +67,7 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" for="description">Description</label>
-                    <input type="text" name="description" placeholder="Type description" class="form-control is-valid" id="author" value="<?=$model->description?>">
+                    <textarea rows="8" cols="50" name="description" placeholder="Type description" class="form-control is-valid" id="author" > <?=$model->description?> </textarea>
                 </div>
 
                 <br />
