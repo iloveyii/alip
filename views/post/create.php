@@ -42,7 +42,7 @@
 
     <div class="row">
         <div class="col-md-12">
-            <h2>Welcome to BackBone - Blog app</h2>
+            <h2>Create a post</h2>
             <br />
         </div>
     </div>
