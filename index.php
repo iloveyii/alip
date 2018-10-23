@@ -5,7 +5,7 @@ require_once 'config/db.php';
 use App\Models\Router;
 use App\Models\Request;
 
-$router = new Router(new Request);
+$router = new Router(new Request, '/posts/index');
 
 $router->get('/posts/index', function ($request) {
     $controller = new \App\Controllers\PostController($request);

@@ -28,6 +28,7 @@ class Request implements IRequest
         foreach ($_SERVER as $key=>$value) {
             $this->{$this->toCamelCase($key)} = $value;
         }
+        $this->redirectUrl = isset($this->redirectUrl) ? $this->redirectUrl : null;
     }
 
     /**

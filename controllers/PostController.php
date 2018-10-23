@@ -35,8 +35,8 @@ class PostController
         $path = explode('\\', __CLASS__);
         $className = array_pop($path);
         $prefix = strtolower( str_replace('Controller', '', $className) );
-
-        require_once "views/{$prefix}/{$view}.php";
+        $dirPath = realpath(dirname(dirname(__FILE__)));
+        require_once "$dirPath/views/{$prefix}/{$view}.php";
     }
 
     public function indexJson()
