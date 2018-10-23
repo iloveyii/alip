@@ -57,17 +57,25 @@ class Post extends Model
 
     public function read()
     {
+        $query = sprintf("SELECT id, title, description AS author, title AS filename, title AS artist FROM %s", $this->tableName);
+        $params = [':title'=>$this->title, ':description'=>$this->description];
+        $row = Database::connect()->select($query, []);
 
     }
 
     public function update()
     {
+        $query = sprintf("SELECT id, title, description AS author, title AS filename, title AS artist FROM %s", $this->tableName);
+        $params = [':title'=>$this->title, ':description'=>$this->description];
+        $rows = Database::connect()->update($query, []);
 
     }
 
     public function delete()
     {
-
+        $query = sprintf("SELECT id, title, description AS author, title AS filename, title AS artist FROM %s", $this->tableName);
+        $params = [':title'=>$this->title, ':description'=>$this->description];
+        $rows = Database::connect()->delete($query, []);
     }
 
 }
