@@ -23,7 +23,8 @@ class Post extends Model
     public function setAttributes(IRequest $request)
     {
         $attributes = $request->body();
-        $this->id = isset($attributes['id']) ? $attributes['id'] : null;
+//        $this->id = isset($attributes['id']) ? $attributes['id'] : null;
+        $this->id = isset($request->params) ? $request->params['id'] : null;
         $this->title = $attributes['title'];
         $this->description = $attributes['description'];
         $this->isNewRecord = true;
@@ -65,9 +66,14 @@ class Post extends Model
 
     public function update()
     {
-        $query = sprintf("SELECT id, title, description AS author, title AS filename, title AS artist FROM %s", $this->tableName);
-        $params = [':title'=>$this->title, ':description'=>$this->description];
-        $rows = Database::connect()->update($query, []);
+        if( ! isset($this->id)) {
+            // test
+            $this->id = 2;
+        }
+        $query = sprintf("UPDATE %s SET title=:title, description=:description WHERE id=:id", $this->tableName);
+        $params = [':id'=>$this->id, ':title'=>$this->title, ':description'=>$this->description];
+        $result = Database::connect()->update($query, $params);
+        return $result;
 
     }
 

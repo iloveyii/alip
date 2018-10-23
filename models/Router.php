@@ -60,9 +60,15 @@ class Router
     {
         $this->request->route = $route;
         $redirectUrl = $this->request->redirectUrl;
-        // Make index optional
-        if(substr($this->request->redirectUrl, -1) == '/') {
-            $redirectUrl = $redirectUrl . 'index';
+        // Split out id part
+        $routeArray = explode(':', $route);
+        $varsArray = [];
+        if(count($routeArray) > 1) {
+            $route = array_shift($routeArray);
+            foreach ($routeArray as $varName) {
+                $varsArray[$varName] = str_replace($route, '', $redirectUrl);
+            }
+            $this->request->params = $varsArray;
         }
 
         if($this->request->requestMethod === 'PUT') {

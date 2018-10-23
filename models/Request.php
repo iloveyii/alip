@@ -14,6 +14,7 @@ class Request implements IRequest
     public $route = null;
     public $getVars = [];
     public $postVars = [];
+    public $params = [];
 
     public function __construct()
     {
@@ -118,7 +119,8 @@ class Request implements IRequest
     private function getPutVars()
     {
         $json = file_get_contents("php://input");
-        $put = json_decode($json);
+        $put = json_decode($json, true);
+        $put['description'] = $put['author'];
         return $put;
     }
 

@@ -33,7 +33,9 @@ $router->get('/api/v1/posts', function ($request) {
 });
 
 $router->put('/api/v1/posts/:id', function ($request) {
-    $data = $request->body();
     header("Content-Type: application/json");
-    echo json_encode($data);
+    $controller = new \App\Controllers\PostController($request);
+    $result = $controller->update();
+    echo $result;
+//    echo json_encode($request->params);
 });

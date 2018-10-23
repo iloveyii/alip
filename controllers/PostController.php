@@ -30,6 +30,18 @@ class PostController
         $this->render('create', $post);
     }
 
+    public function update()
+    {
+        $post = new \App\Models\Post();
+
+        $post->setAttributes($this->request);
+        if( $post->validate() && $post->update() ) {
+            header("Location: /posts/index");
+        }
+
+        $this->render('create', $post);
+    }
+
     public function render($view, $model)
     {
         $path = explode('\\', __CLASS__);
@@ -46,4 +58,6 @@ class PostController
         header("Content-Type: application/json");
         return json_encode($posts);
     }
+
+
 }
