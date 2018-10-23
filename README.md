@@ -23,6 +23,7 @@ For more information about using Composer please see its [documentation](http://
 This framework is very easy to be used. You can create an object of the router by passing a request object to it as shown below.
 
 ```
+// index.php
 require_once 'vendor/autoload.php';
 require_once 'config/db.php';
 
