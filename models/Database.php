@@ -128,5 +128,21 @@ class Database
         }
     }
 
+    public function exec($query)
+    {
+        try {
+            $num = $this->db->exec($query);
+            return $num;
+        }
+        catch (PDOException $e)
+        {
+            throw new Exception($e->getMessage() + $query);
+        }
+        catch( Exception $e)
+        {
+            throw new Exception($e->getMessage() + $query);
+        }
+    }
+
 }
 
