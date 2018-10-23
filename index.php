@@ -43,12 +43,12 @@ $router->put('/api/v1/posts/:id', function ($request) {
     header("Content-Type: application/json");
     $controller = new \App\Controllers\PostController($request);
     $result = $controller->update();
-    echo $result;
+    echo json_encode($result);
 });
 
 $router->delete('/api/v1/posts/:id', function ($request) {
     header("Content-Type: application/json");
     $controller = new \App\Controllers\PostController($request);
     $result = $controller->delete();
-    echo $result;
+    echo json_encode($result);
 });

@@ -13,8 +13,8 @@ This framework is useful for a light PHP web application or RESTFull API applica
   * First clone the repository.
   * Then run composer command `composer dump-autoload`.
   * You need to enable mode rewrite and use the file `.htaccess` in the root directory.
-  * Create a database (manually for now) and import the `alip.sql` file at the root directory.
-  * Adjust the database credentials in the `config/db.php` file as per your environment.
+  * Create a database (manually for now) and adjust the database credentials in the `config/db.php` file as per your environment.
+  * Run the init command to create the database file as `php init.php`.
 
 For more information about using Composer please see its [documentation](http://getcomposer.org/doc/).
 
