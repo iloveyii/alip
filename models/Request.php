@@ -64,7 +64,7 @@ class Request implements IRequest
      * For testing set post vars and this will override the real $_POST vars
      * @param array $post
      */
-    public function setPostVars($post)
+    public function setPostVars(array $post)
     {
         $this->postVars = $post;
     }
@@ -78,7 +78,7 @@ class Request implements IRequest
      * For testing set get vars and this will override the real $_GET vars
      * @param array $get
      */
-    public function setGetVars($get)
+    public function setGetVars(array $get)
     {
         $this->getVars = $get;
     }
