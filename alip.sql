@@ -24,10 +24,10 @@ DROP TABLE IF EXISTS `post`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `post` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(45) DEFAULT NULL,
-  `description` text,
+  `title` varchar(150) NOT NULL,
+  `description` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -36,7 +36,7 @@ CREATE TABLE `post` (
 
 LOCK TABLES `post` WRITE;
 /*!40000 ALTER TABLE `post` DISABLE KEYS */;
-INSERT INTO `post` VALUES (1,'this hklh','thijgkhk kh  hk kkjk khk kh ks is desc'),(2,'Modi ipsum voluptatem velit','Quas quia eu aliquip est alias illo sunt'),(3,'Atque harum ab e','Expedita odio duis dicta nihil doloremque error esse nulla dicta numquam distinctio Molestiae dolore in eu quibusdam quibusdam'),(4,'Debitis quod quibusdam provide','Dolores ullamco qui odio accusamus unde'),(5,'this fasfd','thijgkhk kh  hk kkjk khk kh ks is desc'),(6,'Sed harum eius cum repre','Vel eos sequi temporibus tempore commodi qui mollitia in similique dolor non ullam'),(7,'Libero quis enim provident ','Irure reiciendis ex beatae quis repudiandae enim est'),(8,'This is a new post','Vel eos sequi temporibus tempore commodi qui mollitia in similique dolor non ullam'),(9,'jjjjkkjk  kkjk','Officia veniam dolor quo adipisicing iure vel at omnis illo culpa veritatis qui in ea laudantium explicabo Id vitae');
+INSERT INTO `post` VALUES (4,'Nesciunt in aut consequuntur quaerat qui sit ratione omnis','Sit sed voluptatibus quia porro eiusmod expedita tempore consequatur incididunt eum'),(5,'Sed aliquip alias aut corrupti voluptatem lorem officia et ut','Mollit itaque dolor ullamco ut aut perferendis odio sunt Nam minima quisquam qui perferendis');
 /*!40000 ALTER TABLE `post` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -49,4 +49,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-10-23 13:01:14
+-- Dump completed on 2018-10-23 23:30:58
