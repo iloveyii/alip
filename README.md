@@ -66,6 +66,11 @@ Bellow the directory structure used:
   
  ```
 
+
+## Requirements
+   * You need to enable mode rewrite and use the file `.htaccess` in the root directory.
+   * PHP 7.2
+   * Apache 2
    
 <i>Web development has never been so fun.</i>  
 [Hazrat Ali](http://blog.softhem.se/) 
