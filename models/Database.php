@@ -1,9 +1,10 @@
 <?php
 
 namespace App\Models;
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
-
-class Database
+final class Database
 {
     private static $instance;
     public $db;
@@ -27,6 +28,7 @@ class Database
             $connectionString =  sprintf("mysql:host=%s;dbname=%s;charset=utf8;", DB_HOST, DB_NAME);
             $db = new \PDO($connectionString, DB_USER, DB_PASS);
             $db->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+            Log::write('Database connected successfully', INFO);
         }
         catch (exception $e)
         {
