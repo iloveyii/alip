@@ -22,8 +22,12 @@ abstract class Model implements IModel
          * So we can get object property value by $this->{$property} : ie in second loop
          */
         foreach ($rules as $varName=>$ruleArray) {
+
             foreach ($ruleArray as $key=>$ruleName) {
+
+                if( ! isset($this->{$varName})) continue;
                 $varValue = $this->{$varName};
+
                 switch ($ruleName) {
                     case 'integer':
                         if( isset($varValue) && ! is_numeric($varValue) ) {

@@ -52,7 +52,7 @@
            <?php
             if($model->hasErrors()) {
                 $errors = $model->getErrors();
-                echo $dirPath = realpath(dirname(dirname(__FILE__)));
+                $dirPath = realpath(dirname(dirname(__FILE__)));
                 include_once "{$dirPath}/post/errors.php";
             }
            ?>

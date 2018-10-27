@@ -15,7 +15,7 @@ class Router
         $this->defaultRoute = $defaultRoute;
 
         if( ! in_array($request->requestMethod, $this->allowedMethods)) {
-            header("{$this->request->serverProtocol} 405 Method Not Allowed");
+            header("{$this->request->serverProtocol} 405 Method Not Allowed, allowed methods are ", implode(', ', $this->allowedMethods));
             exit(1);
         }
     }
@@ -25,7 +25,7 @@ class Router
         $this->request->route = $route;
         $redirectUrl = isset($this->request->redirectUrl) ? $this->request->redirectUrl : null;
         // Make index optional
-        if(substr($redirectUrl, -1) == '/') {
+        if(substr($redirectUrl, -1) === '/') {
             $redirectUrl = $redirectUrl . 'index';
         }
 
@@ -35,6 +35,7 @@ class Router
         if($route === $redirectUrl && $this->request->requestMethod === 'GET') {
             $this->pathNotFound = false;
             call_user_func_array($method, [$this->request]);
+            exit(0);
         }
     }
 
@@ -43,13 +44,14 @@ class Router
         $this->request->route = $route;
         $redirectUrl = $this->request->redirectUrl;
         // Make index optional
-        if(substr($this->request->redirectUrl, -1) == '/') {
+        if(substr($this->request->redirectUrl, -1) === '/') {
             $redirectUrl = $redirectUrl . 'index';
         }
 
         if($route === $redirectUrl && $this->request->requestMethod === 'POST') {
             $this->pathNotFound = false;
             call_user_func_array($method, [$this->request]);
+            exit(0);
         }
     }
 
@@ -63,6 +65,7 @@ class Router
         $redirectUrl = $this->request->redirectUrl;
         $routeArray = explode(':', $route);
         $varsArray = [];
+
         if(count($routeArray) > 1) {
             $route = array_shift($routeArray);
             foreach ($routeArray as $varName) {
@@ -81,6 +84,7 @@ class Router
         if($this->request->requestMethod === 'PUT') {
             $this->pathNotFound = false;
             call_user_func_array($method, [$this->request]);
+            exit(0);
         }
     }
 
@@ -92,6 +96,7 @@ class Router
         if($this->request->requestMethod === 'DELETE') {
             $this->pathNotFound = false;
             call_user_func_array($method, [$this->request]);
+            exit(0);
         }
     }
 
