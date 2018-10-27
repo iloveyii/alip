@@ -35,6 +35,7 @@ class Router
         if($route === $redirectUrl && $this->request->requestMethod === 'GET') {
             $this->pathNotFound = false;
             call_user_func_array($method, [$this->request]);
+            Log::write('Found route ' . $route, INFO);
             exit(0);
         }
     }
