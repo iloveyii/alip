@@ -7,7 +7,7 @@ namespace App\Models;
  * Class Model
  * @package App\Models
  */
-class Model
+abstract class Model implements IModel
 {
     protected $errors = [];
 

@@ -52,7 +52,8 @@
            <?php
             if($model->hasErrors()) {
                 $errors = $model->getErrors();
-                include_once 'views/post/errors.php';
+                echo $dirPath = realpath(dirname(dirname(__FILE__)));
+                include_once "{$dirPath}/post/errors.php";
             }
            ?>
         </div>

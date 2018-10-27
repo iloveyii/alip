@@ -2,7 +2,7 @@
 namespace App\Controllers;
 
 
-class PostController
+class PostController extends Controller
 {
     private $request;
 
@@ -72,20 +72,7 @@ class PostController
         return ['status' => 'cannot delete'];
     }
 
-    /**
-     * This method renders a view page
-     * Here we use a convention - we remove the Controller ( eg PostController ) part and look for view file in prefix (post)
-     * @param $view - is the name of the view file without .php extension
-     * @param $model - is the model (eg Post )
-     */
-    public function render($view, $model)
-    {
-        $path = explode('\\', __CLASS__);
-        $className = array_pop($path);
-        $prefix = strtolower( str_replace('Controller', '', $className) );
-        $dirPath = realpath(dirname(dirname(__FILE__)));
-        require_once "$dirPath/views/{$prefix}/{$view}.php";
-    }
+
 
     /**
      * This returns the index page's data only (no html )
