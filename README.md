@@ -12,7 +12,7 @@ This framework is useful for a light PHP web application or RESTFull API applica
 
   * First clone the repository.
   * Then run composer command `composer dump-autoload`.
-  * Create a database (manually for now) and adjust the database credentials in the `config/db.php` file as per your environment.
+  * Create a database (manually for now) and adjust the database credentials in the `config/app.php` file as per your environment.
   * Run the init command to create the database table as `php init.php`.
 
 For more information about using Composer please see its [documentation](http://getcomposer.org/doc/).
@@ -24,7 +24,7 @@ This framework is very easy to be used. You can create an object of the router b
 ```
 // index.php
 require_once 'vendor/autoload.php';
-require_once 'config/db.php';
+require_once 'config/app.php';
 
 use App\Models\Router;
 use App\Models\Request;
@@ -50,26 +50,27 @@ DEMO is here [DEMO](http://alip.softhem.se).
 Bellow the directory structure used:
 
 ```
-   |-assets
-   |---css
-   |---js
+
    |-config
-   |---db.php
+   |---app.php
    |-controllers
    |-models
+   |---Database.php
+   |---Post.php
    |---Request.php
    |---Router.php
    |-views
-   |-index.php
+   |-web
+   |---index.php
+   |---assets
    
-  
  ```
 
 
 ## Requirements
    * You need to enable mode rewrite and use the file `.htaccess` in the root directory.
    * Make web directory writeable for web server user (www-data in apache), to enable logging.
-   * Disable displaying errors in config/db.php
+   * Disable displaying errors in config/app.php
    * PHP 7.2
    * Apache 2
    * MySql 14.14

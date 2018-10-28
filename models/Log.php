@@ -28,7 +28,7 @@ class Log
      * It writes to log file in web/log.txt
      *
      * @param $message - String message to output
-     * @param $level - Levels as defined in config/db.php
+     * @param $level - Levels as defined in config/app.php
      * @return bool
      * @throws \Exception
      */
