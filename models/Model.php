@@ -9,9 +9,15 @@ namespace App\Models;
  */
 abstract class Model implements IModel
 {
+    /**
+     * @var array
+     */
     protected $errors = [];
 
-    public function validate()
+    /**
+     * @return array
+     */
+    public function validate() : array
     {
         $validation = []; // contains all errors
         $rules = $this->rules(); // rules in the child class
@@ -77,12 +83,12 @@ abstract class Model implements IModel
         return count($validation) === 0;
     }
 
-    public function getErrors()
+    public function getErrors() : array
     {
         return $this->errors;
     }
 
-    public function hasErrors()
+    public function hasErrors() : bool
     {
         return count($this->errors) > 0;
     }

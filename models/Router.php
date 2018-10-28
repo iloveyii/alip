@@ -3,12 +3,32 @@ namespace App\Models;
 
 class Router
 {
+    /**
+     * @var IRequest
+     */
     private $request;
+    /**
+     * @var string
+     */
     public $defaultRoute = null;
+    /**
+     * @var callable
+     */
     public $defaultMethod = null;
+    /**
+     * @var bool
+     */
     private $pathNotFound = true;
+    /**
+     * @var array
+     */
     private $allowedMethods = [ 'GET', 'POST', 'PUT', 'DELETE'];
 
+    /**
+     * Router constructor.
+     * @param IRequest $request
+     * @param $defaultRoute
+     */
     public function __construct(IRequest $request, $defaultRoute)
     {
         $this->request = $request;
@@ -20,6 +40,13 @@ class Router
         }
     }
 
+    /**
+     * Handles the get HTTP request
+     *
+     * @param $route
+     * @param $method
+     * @throws \Exception
+     */
     public function get($route, $method)
     {
         $this->request->route = $route;
@@ -40,6 +67,12 @@ class Router
         }
     }
 
+    /**
+     * Handles the post HTTP request
+     *
+     * @param $route
+     * @param $method
+     */
     public function post($route, $method)
     {
         $this->request->route = $route;
@@ -54,6 +87,50 @@ class Router
             call_user_func_array($method, [$this->request]);
             exit(0);
         }
+    }
+
+    /**
+     * Handles the put HTTP request
+     *
+     * @param $route
+     * @param $method
+     */
+    public function put($route, $method)
+    {
+        $this->request->route = $route;
+        $this->getParams($route);
+
+        if($this->request->requestMethod === 'PUT') {
+            $this->pathNotFound = false;
+            call_user_func_array($method, [$this->request]);
+            exit(0);
+        }
+    }
+
+    /**
+     * Handles the delete HTTP request
+     *
+     * @param $route
+     * @param $method
+     */
+    public function delete($route, $method)
+    {
+        $this->request->route = $route;
+        $this->getParams($route);
+
+        if($this->request->requestMethod === 'DELETE') {
+            $this->pathNotFound = false;
+            call_user_func_array($method, [$this->request]);
+            exit(0);
+        }
+    }
+
+    private function renderDefaultRoute()
+    {
+        if( ! is_null($this->defaultRoute) && is_callable($this->defaultMethod)) {
+            return call_user_func_array($this->defaultMethod, [$this->request]);
+        }
+        return false;
     }
 
     /**
@@ -76,49 +153,19 @@ class Router
         }
     }
 
-
-    public function put($route, $method)
-    {
-        $this->request->route = $route;
-        $this->getParams($route);
-
-        if($this->request->requestMethod === 'PUT') {
-            $this->pathNotFound = false;
-            call_user_func_array($method, [$this->request]);
-            exit(0);
-        }
-    }
-
-    public function delete($route, $method)
-    {
-        $this->request->route = $route;
-        $this->getParams($route);
-
-        if($this->request->requestMethod === 'DELETE') {
-            $this->pathNotFound = false;
-            call_user_func_array($method, [$this->request]);
-            exit(0);
-        }
-    }
-
-    public function renderDefaultRoute()
-    {
-        if( ! is_null($this->defaultRoute) && is_callable($this->defaultMethod)) {
-            return call_user_func_array($this->defaultMethod, [$this->request]);
-        }
-
-        return false;
-    }
-
+    /**
+     * If no route found then renders default route finally
+     */
     public function __destruct()
     {
         if($this->pathNotFound) {
             $result = $this->renderDefaultRoute();
             if($result === false) {
                 header("{$this->request->serverProtocol} 404 Not Found");
-                echo 'Path not found';
             }
         }
+        $this->request = null;
+        exit(0);
     }
 
 }

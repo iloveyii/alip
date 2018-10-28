@@ -5,8 +5,17 @@ namespace App\Models;
 
 class Log
 {
+    /**
+     * @var Log
+     */
     protected static $instance;
+    /**
+     * @var string
+     */
     private static $fileName = 'log.txt';
+    /**
+     * @var array
+     */
     private static $errorLevels = [
         NONE=> 'NONE',
         INFO=>'INFO',
@@ -15,13 +24,29 @@ class Log
         ALL=>'ALL'
     ];
 
-    public static function write($message, $level)
+    /**
+     * It writes to log file in web/log.txt
+     *
+     * @param $message - String message to output
+     * @param $level - Levels as defined in config/db.php
+     * @return bool
+     * @throws \Exception
+     */
+    public static function write($message, $level) : bool
     {
         if($level === ERROR_LOG_LEVEL || ERROR_LOG_LEVEL === ALL) {
-            self::writeToFile($message, $level);
+            return self::writeToFile($message, $level);
         }
     }
 
+    /**
+     * This is the function that actually does I/O
+     *
+     * @param $message
+     * @param $level
+     * @return bool|int
+     * @throws \Exception
+     */
     private static function writeToFile($message, $level)
     {
         date_default_timezone_set('Europe/Stockholm');

@@ -34,6 +34,8 @@ class Request implements IRequest
 
     /**
      * Converts the vars in $_SERVER to camelCase
+     * The vars in $_SERVER has the form CAPS_CAPS
+     * We first convert to lower, then explode by _ , then change every work into initial caps except first word
      * @param $value
      * @return mixed|string
      */
@@ -49,6 +51,11 @@ class Request implements IRequest
         return $variableName;
     }
 
+    /**
+     * Returns the GET/PUT/POST parameters in the request depending on its type in the requestMethod
+     *
+     * @return array
+     */
     public function body()
     {
         switch ($this->requestMethod) {
@@ -60,8 +67,9 @@ class Request implements IRequest
                 return $this->getPostVars();
             case 'PUT':
                 return $this->getPutVars();
-
         }
+
+        return [];
     }
 
     /**
@@ -100,7 +108,7 @@ class Request implements IRequest
     {
         $get = [];
         foreach ($this->getVars as $key => $value) {
-            $get[$key] = $value; //  filter_input(INPUT_GET, $key, FILTER_SANITIZE_SPECIAL_CHARS);
+            $get[$key] =  filter_input(INPUT_GET, $key, FILTER_SANITIZE_SPECIAL_CHARS);
         }
 
         return $get;
