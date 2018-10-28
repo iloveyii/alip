@@ -14,6 +14,8 @@ abstract class Model implements IModel
      */
     protected $errors = [];
 
+    abstract public function rules() : array ;
+
     /**
      * @return array
      */
@@ -53,7 +55,7 @@ abstract class Model implements IModel
                         }
                         break;
                     case 'alpha':
-                        if( preg_match('/[0-9]/', $varValue) == true) {
+                        if( preg_match('/[0-9]/', $varValue) === true) {
                             $validation[$varName][] = "{$varName} should contain only alphabets";
                         }
                         break;
@@ -83,11 +85,19 @@ abstract class Model implements IModel
         return count($validation) === 0;
     }
 
+    /**
+     * Return the array or errors
+     * @return array
+     */
     public function getErrors() : array
     {
         return $this->errors;
     }
 
+    /**
+     * Check if model has errors
+     * @return bool
+     */
     public function hasErrors() : bool
     {
         return count($this->errors) > 0;

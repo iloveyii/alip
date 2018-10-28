@@ -5,8 +5,11 @@ require_once 'config/db.php';
 use App\Models\Database;
 
 $tableName = 'post';
+$dropTable = "DROP TABLE IF EXISTS {$tableName}";
+Database::connect()->exec($dropTable);
+
 $sql = "CREATE table $tableName(
-  id INT( 11 ) AUTO_INCREMENT PRIMARY KEY,
+  id INT( 11 ) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   title VARCHAR( 150 ) NOT NULL,
   description TEXT NOT NULL);";
 

@@ -83,7 +83,7 @@ class Request implements IRequest
 
     public function isPost()
     {
-        return ($this->requestMethod == 'POST');
+        return ($this->requestMethod === 'POST');
     }
 
     /**

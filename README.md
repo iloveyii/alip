@@ -69,8 +69,10 @@ Bellow the directory structure used:
 ## Requirements
    * You need to enable mode rewrite and use the file `.htaccess` in the root directory.
    * Make web directory writeable for web server user (www-data in apache), to enable logging.
+   * Disable displaying errors in config/db.php
    * PHP 7.2
    * Apache 2
+   * MySql 14.14
    
 <i>Web development has never been so fun.</i>  
 [Hazrat Ali](http://blog.softhem.se/) 

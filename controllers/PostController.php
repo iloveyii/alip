@@ -16,7 +16,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $this->render('index', $posts = [1,2,3]);
+        $this->render('index', []);
     }
 
     /**
