@@ -5,21 +5,25 @@ namespace App\Models;
 /**
  * This is the parent model with common functionality for all child classes
  * Class Model
+ *
  * @package App\Models
  */
-abstract class Model implements IModel
+abstract class Model
 {
     /**
      * @var array
      */
     protected $errors = [];
 
-    abstract public function rules() : array ;
-
     /**
      * @return array
      */
-    public function validate() : array
+    abstract public function rules() : array ;
+
+    /**
+     * @return bool
+     */
+    public function validate() : bool
     {
         $validation = []; // contains all errors
         $rules = $this->rules(); // rules in the child class
@@ -30,11 +34,11 @@ abstract class Model implements IModel
          * So we can get object property value by $this->{$property} : ie in second loop
          */
         foreach ($rules as $varName=>$ruleArray) {
+            $varValue = $this->{$varName};
 
             foreach ($ruleArray as $key=>$ruleName) {
 
                 if( ! isset($this->{$varName})) continue;
-                $varValue = $this->{$varName};
 
                 switch ($ruleName) {
                     case 'integer':
@@ -55,7 +59,7 @@ abstract class Model implements IModel
                         }
                         break;
                     case 'alpha':
-                        if( preg_match('/[0-9]/', $varValue) === true) {
+                        if( preg_match('/[0-9]/', $varValue) === 1) {
                             $validation[$varName][] = "{$varName} should contain only alphabets";
                         }
                         break;

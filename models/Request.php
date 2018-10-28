@@ -114,7 +114,7 @@ class Request implements IRequest
         return $get;
     }
 
-    private function getPostVars()
+    private function getPostVars() : array
     {
         $post = [];
         foreach ($this->postVars as $key => $value) {
