@@ -53,12 +53,20 @@ class Log
         $levelName = self::$errorLevels[$level];
         $line = sprintf("%s\t%s\t%s%s", $levelName, date('Y-m-d h:i:s', time()), $message, PHP_EOL);
         $dirPath = realpath(dirname(dirname(__FILE__)));
+
         $filePath = sprintf("%s/%s/%s", $dirPath, 'web', self::$fileName);
 
-        try {
-            return file_put_contents($filePath, $line, FILE_APPEND | LOCK_EX);
-        } catch (exception $e) {
-            throw new \Exception($e->getMessage());
+        if(is_writable(dirname($filePath)) ) {
+
+            try {
+                return file_put_contents($filePath, $line, FILE_APPEND | LOCK_EX);
+            } catch (exception $e) {
+                throw new \Exception($e->getMessage());
+            }
+
+        } else {
+            syslog(LOG_NOTICE, "Cannot write to directory {$filePath}");
+            return false;
         }
     }
 }

@@ -68,6 +68,7 @@ Bellow the directory structure used:
 
 ## Requirements
    * You need to enable mode rewrite and use the file `.htaccess` in the root directory.
+   * Make web directory writeable for web server user (www-data in apache), to enable logging.
    * PHP 7.2
    * Apache 2
    
